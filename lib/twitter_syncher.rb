@@ -1,19 +1,20 @@
 require "twitter"
 require './lib/credential_manager'
 
-class WeiboSyncher
-  ::Weibo::Config.api_key = "565166882"
-  ::Weibo::Config.api_secret = "155610a46c6bce1ca7aa45ddc7fd1465"
-
+class TwitterSyncher
   def initialize
     if credential = CredentialManager.load('twitter')
-      @oauth = ::Weibo::OAuth.new(::Weibo::Config.api_key, ::Weibo::Config.api_secret)
-      @oauth.authorize_from_access(credential["token"], credential["secret"])
+      Twitter.configure do |config|
+        config.consumer_key = "cQjOzUhp2zbvfklTezyxRg"
+        config.consumer_secret = "0jXzmtc8xoKwUphWE08Loe0ZPoNZZdLseOMXnmCkII"
+        config.oauth_token = credential["token"]
+        config.oauth_token_secret = credential["secret"]
+      end
     end
   end
 
   def update_status text
-    ::Weibo::Base.new(@oauth).update(text)
+    Twitter.update(text)
   end
 end
 
