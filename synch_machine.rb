@@ -7,8 +7,11 @@ require File.join(".", "lib", "twitter_syncher")
 
 EM.run do
   weibo = WeiboSyncher.new
-  weibo.update_status "test"
-
   twitter = TwitterSyncher.new
-  twitter.update_status "test"
+
+  EM.add_periodic_timer(60*1000) {
+    weibo.get_user_timeline.each do |update|
+      twitter.update_status update.text
+    end
+  }
 end
