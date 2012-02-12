@@ -9,7 +9,7 @@ EM.run do
   weibo = WeiboSyncher.new
   twitter = TwitterSyncher.new
 
-  EM.add_periodic_timer(60*1000) {
+  EM.add_periodic_timer(10000) {
     weibo.get_user_timeline.each do |update|
       twitter.update_status update.text
     end
