@@ -19,3 +19,5 @@ gem "twitter"
 gem "omniauth"
 gem "omniauth-weibo"
 gem "omniauth-twitter"
+
+gem "rspec"
