@@ -9,10 +9,10 @@ EM.run do
   weibo = WeiboSyncher.new
   twitter = TwitterSyncher.new
 
-  EM.add_periodic_timer(10000) {
+  EM.add_periodic_timer(10) {
     puts "=== Checking weibo ==="
     weibo.get_user_timeline.each do |update|
-      puts "found new updates, start to sync..."
+      puts "found new updates, start to sync... #{update.text}"
       twitter.update_status update.text
     end
   }

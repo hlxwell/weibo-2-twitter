@@ -22,6 +22,9 @@ class WeiboSyncher
 
   def get_user_timeline
     since_id = SinceIdManager.load!("weibo", @client)
-    @client.user_timeline(:since_id => since_id)
+    all_unsynched_updates = @client.user_timeline(:since_id => since_id)
+    all_unsynched_updates.tap { |updates|
+      SinceIdManager.update("weibo", updates.last.id) if updates and updates.is_a?(Array) and updates.last
+    }
   end
 end
