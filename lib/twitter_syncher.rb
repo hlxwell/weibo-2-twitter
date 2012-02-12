@@ -19,7 +19,8 @@ class TwitterSyncher
   end
 
   def update_status update
-    @client.update(update.text)
+    # weibo support 280 english chars, but twitter only support 140
+    @client.update update.text.slice(0..139)
     # update since id
     SinceIdManager.update("weibo", update.id)
   end
