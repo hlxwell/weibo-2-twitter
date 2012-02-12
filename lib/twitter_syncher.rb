@@ -18,8 +18,10 @@ class TwitterSyncher
     )
   end
 
-  def update_status text
-    @client.update(text)
+  def update_status update
+    @client.update(update.text)
+    # update since id
+    SinceIdManager.update("weibo", update.id)
   end
 end
 

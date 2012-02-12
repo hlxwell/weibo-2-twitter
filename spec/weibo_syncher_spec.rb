@@ -6,4 +6,7 @@ describe 'Weibo syncher' do
     updates = weibo.get_user_timeline
     updates.size.should > 0
   end
+
+  it "should update since_id in yaml after synched message" do
+  end
 end
