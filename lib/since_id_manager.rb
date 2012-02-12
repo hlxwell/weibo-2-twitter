@@ -5,9 +5,7 @@ class SinceIdManager
 
   class << self
     def load! provider, client
-      YamlConfigStore.load!(@@latest_update_data_file_path, provider)
-
-       # || find_and_create_since_id(client)
+      YamlConfigStore.load!(@@latest_update_data_file_path, provider) || find_and_create_since_id(client)
     end
 
     def update provider, since_id

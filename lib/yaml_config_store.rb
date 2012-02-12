@@ -16,14 +16,19 @@ class YamlConfigStore
 
     def persist_data file_path
       # load config
-      loaded_data = YAML.load_file file_path
+      if file_path and File.exists?(file_path)
+        loaded_data = YAML.load_file file_path
+      end
+
       loaded_data ||= {}
 
       # update config
       yield loaded_data
 
       # save back
-      File.write file_path, YAML.dump(loaded_data)
+      File.open file_path, "w" do |f|
+        f.write YAML.dump(loaded_data)
+      end
 
       loaded_data
     end
