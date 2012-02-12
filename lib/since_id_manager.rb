@@ -1,7 +1,7 @@
-require './lib/yaml_config_store'
+require 'yaml_config_store'
 
 class SinceIdManager
-  @@latest_update_data_file_path = "./latest_updates.yml"
+  @@latest_update_data_file_path = "latest_updates.yml"
 
   class << self
     def load! provider, client

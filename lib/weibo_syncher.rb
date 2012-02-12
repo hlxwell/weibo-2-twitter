@@ -1,6 +1,6 @@
 require 'weibo'
-require './lib/credential_manager'
-require './lib/since_id_manager'
+require 'credential_manager'
+require 'since_id_manager'
 
 class WeiboSyncher
   # TODO load from config, but weibo gem has a bug, so fix it or skip it.

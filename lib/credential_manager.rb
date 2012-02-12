@@ -1,7 +1,7 @@
-require './lib/yaml_config_store'
+require 'yaml_config_store'
 
 class CredentialManager
-  @@oauth_tokens_file_path = "./oauth_tokens.yml"
+  @@oauth_tokens_file_path = "oauth_tokens.yml"
 
   class << self
     def load! provider

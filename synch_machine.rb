@@ -1,9 +1,6 @@
 %w(rubygems bundler).each { |dependency| require dependency }
 Bundler.setup
-%w(eventmachine oauth json weibo).each { |dependency| require dependency }
-
-require File.join(".", "lib", "weibo_syncher")
-require File.join(".", "lib", "twitter_syncher")
+%w(eventmachine oauth json weibo weibo_syncher twitter_syncher).each { |dependency| require dependency }
 
 EM.run do
   weibo = WeiboSyncher.new

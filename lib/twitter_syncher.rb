@@ -1,5 +1,5 @@
 require "twitter"
-require './lib/credential_manager'
+require 'credential_manager'
 
 # Just need to push state to twitter which content get from weibo
 #
