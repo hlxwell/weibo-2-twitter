@@ -1,10 +1,13 @@
 require 'weibo'
 require './lib/credential_manager'
-require './lib/latest_update_manager'
+require './lib/since_id_manager'
 
 class WeiboSyncher
+  # TODO load from config, but weibo gem has a bug, so fix it or skip it.
   Weibo::Config.api_key = "565166882"
   Weibo::Config.api_secret = "155610a46c6bce1ca7aa45ddc7fd1465"
+
+  attr_accessor :client
 
   def initialize
     credential = CredentialManager.load!('weibo')
@@ -17,18 +20,8 @@ class WeiboSyncher
     @client.update(text)
   end
 
-  def user_timeline
-    @client.user_timeline
-  end
-
   def get_user_timeline
-    if since_id = LatestUpdateManager.load("weibo")
-      @client.user_timeline(:since_id => since_id)
-    else
-      since_id = @client.user_timeline(:count => 1).last.try(:id)
-      LatestUpdateManager.set_last_update_id("weibo", since_id)
-      []
-    end
+    since_id = SinceIdManager.load!("weibo", @client)
+    @client.user_timeline(:since_id => since_id)
   end
 end
-

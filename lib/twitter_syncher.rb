@@ -1,7 +1,10 @@
 require "twitter"
 require './lib/credential_manager'
 
+# Just need to push state to twitter which content get from weibo
+#
 class TwitterSyncher
+  # TODO load from config
   Twitter.configure do |config|
     config.consumer_key = "cQjOzUhp2zbvfklTezyxRg"
     config.consumer_secret = "0jXzmtc8xoKwUphWE08Loe0ZPoNZZdLseOMXnmCkII"
