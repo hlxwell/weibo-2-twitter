@@ -13,7 +13,7 @@ EM.run do
     puts "=== Checking weibo ==="
     weibo.get_unsynched_updates.each do |update|
       puts "found new updates, start to sync... #{update.text}"
-      twitter.update_status update.text
+      twitter.update_status update
     end
   }
 end

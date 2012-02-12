@@ -16,8 +16,8 @@ class WeiboSyncher
     @client = Weibo::Base.new(oauth)
   end
 
-  def update_status text
-    @client.update(text)
+  def update_status update
+    @client.update(update.text)
   end
 
   def get_unsynched_updates
