@@ -1,3 +1,4 @@
-oauth_tokens.yml
+config/oauth_tokens.yml
 lib/.DS_Store
-latest_updates.yml
+config/latest_updates.yml
+Weibo2Twitter.output

@@ -4,6 +4,7 @@ gem "pry"
 gem "eventmachine"
 gem "sinatra"
 gem "shotgun"
+gem "daemons"
 
 gem "sass"
 gem 'slim'
