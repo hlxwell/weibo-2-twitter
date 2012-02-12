@@ -1,7 +1,7 @@
 class YamlConfigStore
   class << self
     def load! file_path, provider
-      loaded_data = YAML.load_file File.join(File.dirname(__FILE__), "..", "config", file_path)
+      loaded_data = YAML.load_file real_path(file_path)
       if !loaded_data.is_a?(Hash) or loaded_data[provider].nil?
         loaded_data = create_a_config_node_for(provider, file_path)
       end
@@ -9,10 +9,12 @@ class YamlConfigStore
     end
 
     def update file_path, provider, data_hash
-      persist_data file_path do |config|
+      persist_data real_path(file_path) do |config|
         config[provider] = data_hash
       end
     end
+
+    private
 
     def persist_data file_path
       # load config
@@ -33,7 +35,9 @@ class YamlConfigStore
       loaded_data
     end
 
-    private
+    def real_path file_path
+      File.join(File.dirname(__FILE__), "..", "config", file_path)
+    end
 
     def create_a_config_node_for provider, file_path
       update file_path, provider, nil
