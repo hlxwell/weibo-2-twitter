@@ -1,11 +1,12 @@
 require 'weibo'
 require 'credential_manager'
 require 'since_id_manager'
+require 'oauth_account_manager'
 
 class WeiboSyncher
-  # TODO load from config, but weibo gem has a bug, so fix it or skip it.
-  Weibo::Config.api_key = "565166882"
-  Weibo::Config.api_secret = "155610a46c6bce1ca7aa45ddc7fd1465"
+  # weibo gem has a bug, so fix it or skip it.
+  Weibo::Config.api_key = OauthAccountManager.load!("weibo")["key"]
+  Weibo::Config.api_secret = OauthAccountManager.load!("weibo")["secret"]
 
   attr_accessor :client
 
